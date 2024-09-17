@@ -5,9 +5,12 @@ import com.ems.spring.employee_manage_spring_backend.entity.Employee;
 import com.ems.spring.employee_manage_spring_backend.mapper.EmployeeMapper;
 import com.ems.spring.employee_manage_spring_backend.repository.EmployeeRepository;
 import com.ems.spring.employee_manage_spring_backend.service.EmployeeService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class EmployeeServiceImplementation implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
