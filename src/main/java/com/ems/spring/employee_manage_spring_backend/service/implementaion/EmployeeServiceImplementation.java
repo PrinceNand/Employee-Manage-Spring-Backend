@@ -2,6 +2,7 @@ package com.ems.spring.employee_manage_spring_backend.service.implementaion;
 
 import com.ems.spring.employee_manage_spring_backend.dto.EmployeeDTO;
 import com.ems.spring.employee_manage_spring_backend.entity.Employee;
+import com.ems.spring.employee_manage_spring_backend.exception.ResourceNotFoundException;
 import com.ems.spring.employee_manage_spring_backend.mapper.EmployeeMapper;
 import com.ems.spring.employee_manage_spring_backend.repository.EmployeeRepository;
 import com.ems.spring.employee_manage_spring_backend.service.EmployeeService;
@@ -26,5 +27,14 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
         // convert to Employee DTO and send to client (Postman)
         return EmployeeMapper.mapToEmployeeDTO(savedEmployee);
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                () -> new ResourceNotFoundException("User Not found with id: "+ employeeId)
+        );
+
+        return EmployeeMapper.mapToEmployeeDTO(employee);
     }
 }

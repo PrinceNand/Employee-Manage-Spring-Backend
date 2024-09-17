@@ -6,10 +6,7 @@ import com.ems.spring.employee_manage_spring_backend.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -29,6 +26,17 @@ public class EmployeeController {
 
         // return the status code to user in postman or swagger
         return new ResponseEntity<>(saveEmployee, HttpStatus.CREATED);
+    }
+
+    // Get User by id using client(Postman)
+    @GetMapping("getEmpId/{id}")
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("id") Long employeeId) {
+
+        // used to send data to EmployeeService -> EmployeeServiceImpl -> Repository -> DB
+        EmployeeDTO getEmployeeId = employeeService.getEmployeeById(employeeId);
+
+        // return the status code to user in postman or swagger
+        return ResponseEntity.ok(getEmployeeId);
     }
 
 }
