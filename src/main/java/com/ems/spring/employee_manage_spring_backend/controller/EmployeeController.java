@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/employees")
@@ -37,6 +39,17 @@ public class EmployeeController {
 
         // return the status code to user in postman or swagger
         return ResponseEntity.ok(getEmployeeId);
+    }
+
+    // Get User by id using client(Postman)
+    @GetMapping("getAllEmployee")
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployee() {
+
+        // used to send data to EmployeeService -> EmployeeServiceImpl -> Repository -> DB
+        List<EmployeeDTO> getEmployeeId = employeeService.getAllEmployees();
+
+        // return the status code to user in postman or swagger
+        return new ResponseEntity<>(getEmployeeId,HttpStatus.OK);
     }
 
 }

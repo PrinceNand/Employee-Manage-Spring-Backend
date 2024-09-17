@@ -10,6 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImplementation implements EmployeeService {
@@ -37,4 +40,15 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
         return EmployeeMapper.mapToEmployeeDTO(employee);
     }
+
+    @Override
+    public List<EmployeeDTO> getAllEmployees() {
+        List<Employee> findEmployee = employeeRepository.findAll();
+
+        // convert list to map stream to JSON
+        return findEmployee.stream().map(EmployeeMapper::mapToEmployeeDTO)
+                .collect(Collectors.toList());
+    }
+
+
 }
