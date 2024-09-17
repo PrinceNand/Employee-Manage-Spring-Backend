@@ -14,4 +14,7 @@ public interface EmployeeService {
 
     // Get All employee from Services
     List<EmployeeDTO> getAllEmployees();
+
+    // Update Employee
+    EmployeeDTO updateEmployeeData(EmployeeDTO employeeDTO);
 }

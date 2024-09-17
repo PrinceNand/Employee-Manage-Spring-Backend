@@ -2,6 +2,7 @@ package com.ems.spring.employee_manage_spring_backend.controller;
 
 
 import com.ems.spring.employee_manage_spring_backend.dto.EmployeeDTO;
+import com.ems.spring.employee_manage_spring_backend.entity.Employee;
 import com.ems.spring.employee_manage_spring_backend.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,14 @@ public class EmployeeController {
 
         // return the status code to user in postman or swagger
         return new ResponseEntity<>(getEmployeeId,HttpStatus.OK);
+    }
+
+    @PutMapping("updateEmployee/{id}")
+    public ResponseEntity<EmployeeDTO> updateEmployeeById(@PathVariable("id") Long userId,
+                                              @RequestBody EmployeeDTO employeeDTO){
+        employeeDTO.setId(userId);
+        EmployeeDTO updateEmployeeData = employeeService.updateEmployeeData(employeeDTO);
+        return new ResponseEntity<>(updateEmployeeData, HttpStatus.OK);
     }
 
 }
